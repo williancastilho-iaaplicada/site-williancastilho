@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Willian Castilho · IA Aplicada</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Mentoria em IA aplicada para empresas, workshops, grupos reduzidos de 2 a 5 pessoas e 1:1. Do problema à solução funcionando, com Willian Castilho.">
+<meta property="og:title" content="Willian Castilho · IA Aplicada">
+<meta property="og:description" content="Mentoria em IA aplicada para empresas, workshops, grupos reduzidos e 1:1. Do problema à solução funcionando.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:url" content="https://williancastilho.com.br/">
+<meta property="og:image" content="https://williancastilho.com.br/img/og.jpg">
+<link rel="canonical" href="https://williancastilho.com.br/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Person","name":"Willian Castilho","jobTitle":"Engenheiro de IA Aplicada","url":"https://williancastilho.com.br/","address":{"@type":"PostalAddress","addressLocality":"Poços de Caldas","addressRegion":"MG","addressCountry":"BR"},"sameAs":["https://www.linkedin.com/in/willianpcastilho"]}
+</script>
+<style>
+/* Layout: página única editorial clara; hero em duas colunas com retrato dentro de arcos concêntricos,
+   seções alternando texto largo e cartões de vidro; um único azul de acento. Tema único (claro), por escolha da marca. */
+:root{
+  --bg:#F8FAFC;            /* Alabaster */
+  --surface:rgba(255,255,255,.85);
+  --surface-solid:#FFFFFF;
+  --line:#E2E8F0;
+  --ink:#0F172A;           /* Midnight Navy */
+  --ink-2:#475569;         /* Slate */
+  --ink-3:#64748B;
+  --accent:#2563EB;
+  --accent-deep:#1E3A8A;
+  --glow:#DBEAFE;
+  --pain:#DC2626;
+  --gain:#16A34A;
+  --wa:#16A34A;
+  --display:"Plus Jakarta Sans","Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+  --shadow:0 10px 25px -5px rgba(15,23,42,.06),0 4px 10px -2px rgba(15,23,42,.04);
+  --radius:20px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.65 var(--body);overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+img{max-width:100%;display:block}
+a{color:var(--accent-deep)}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:8px}
+h1,h2,h3{font-family:var(--display);color:var(--ink);text-wrap:balance;margin:0}
+h2{font-size:clamp(1.9rem,1.2rem + 2.6vw,2.9rem);font-weight:700;line-height:1.12;letter-spacing:-.02em}
+h3{font-size:1.3rem;font-weight:700;line-height:1.25}
+p{margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.section{padding-block:clamp(72px,9vw,120px)}
+.eyebrow{font:600 .78rem/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.lede{font-size:1.15rem;color:var(--ink-2);max-width:62ch}
+.head{display:grid;gap:18px;max-width:760px;margin-bottom:clamp(36px,5vw,56px)}
+.muted{color:var(--ink-3)}
+
+/* Botões */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:600 1rem/1 var(--display);text-decoration:none;padding:17px 24px;border-radius:14px;transition:transform .15s ease,box-shadow .15s ease,background .15s ease;min-height:52px;text-align:center}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--accent);color:#fff;box-shadow:0 10px 24px -8px rgba(37,99,235,.55)}
+.btn-primary:hover{background:var(--accent-deep)}
+.btn-ghost{background:var(--surface-solid);color:var(--ink);border:1px solid var(--line)}
+.btn-ghost:hover{border-color:var(--accent)}
+.btn svg{width:20px;height:20px;flex:none}
+
+/* Vidro */
+.glass{background:var(--surface);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(226,232,240,.9);border-top-color:rgba(255,255,255,.9);border-radius:var(--radius);box-shadow:var(--shadow)}
+
+/* Espaço reservado para foto */
+.foto{position:relative;margin:0;border-radius:var(--radius);overflow:hidden;background:
+  repeating-linear-gradient(135deg,rgba(37,99,235,.05) 0 12px,transparent 12px 24px),linear-gradient(160deg,#EFF4FB,#E2E8F0);
+  border:1.5px dashed #94A3B8;display:grid;place-items:center;text-align:center;max-width:100%}
+.foto img{width:100%;height:100%;object-fit:cover}
+.foto .ph{display:grid;gap:6px;padding:18px;max-width:30ch}
+.foto .ph b{font:600 .75rem/1 var(--mono);letter-spacing:.14em;color:var(--accent-deep)}
+.foto .ph span{font-size:.86rem;line-height:1.45;color:var(--ink-2)}
+.r-45{aspect-ratio:4/5}.r-23{aspect-ratio:2/3}
+.foto.has-img{background:#fff;border:1px solid var(--line);display:block}
+.foto.has-img img{object-position:50% 0}
+[hidden]{display:none!important}.r-43{aspect-ratio:4/3}.r-11{aspect-ratio:1/1}.r-169{aspect-ratio:16/9}.r-34{aspect-ratio:3/4}
+
+/* Topo */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(248,250,252,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:border-color .2s}
+.top.scrolled{border-bottom-color:var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:72px}
+.brand{font:700 1.02rem/1 var(--display);color:var(--ink);text-decoration:none;white-space:nowrap;letter-spacing:-.01em}
+.brand i{font-style:normal;color:var(--line);margin:0 8px;font-weight:400}
+.brand em{font-style:normal;color:var(--accent)}
+.nav{display:flex;align-items:center;gap:28px}
+.nav a{color:var(--ink-2);text-decoration:none;font-weight:500;font-size:.95rem}
+.nav a:hover{color:var(--ink)}
+.nav .btn{padding:12px 18px;min-height:44px;font-size:.92rem;color:#fff}
+@media (max-width:900px){.nav a:not(.btn){display:none}}
+@media (max-width:480px){.brand em,.brand i{display:none}.nav .btn span{display:none}.nav .btn{padding:12px}}
+
+/* Hero */
+.hero{position:relative;padding-block:clamp(40px,6vw,80px) clamp(56px,7vw,96px);overflow:hidden}
+.hero::before{content:"";position:absolute;inset:-20% -10% auto auto;width:70vw;height:70vw;max-width:900px;max-height:900px;background:radial-gradient(circle,rgba(219,234,254,.9),rgba(219,234,254,0) 62%);pointer-events:none}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.12fr .88fr;gap:clamp(32px,5vw,72px);align-items:center}
+.hero-copy{display:grid;gap:26px;min-width:0}
+.hero h1{font-size:clamp(2.1rem,1.1rem + 3.6vw,3.7rem);font-weight:800;line-height:1.02;letter-spacing:-.025em;text-transform:uppercase}
+.hero h1 span{color:var(--accent)}
+.hero .lede{font-size:clamp(1.08rem,1rem + .4vw,1.25rem)}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px}
+.note{font-size:.92rem;color:var(--ink-3);display:flex;gap:8px;align-items:flex-start;max-width:52ch}
+.note::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--gain);margin-top:.55em}
+.hero-media{position:relative;min-width:0}
+.arcs{position:absolute;inset:-12%;pointer-events:none}
+.arcs circle{fill:none;stroke:var(--line);stroke-width:1}
+.hero-media .foto{position:relative;box-shadow:var(--shadow)}
+.float{position:absolute;padding:14px 18px;display:grid;gap:4px;max-width:230px}
+.float b{font:800 1.5rem/1 var(--display);color:var(--ink)}
+.float span{font-size:.85rem;line-height:1.35;color:var(--ink-2)}
+.float.a{left:-28px;bottom:56px}
+.float.b{right:-18px;top:36px}
+@media (max-width:900px){.hero .wrap{grid-template-columns:1fr}.hero-media{max-width:460px;margin:0 auto;width:100%}.float.a{left:8px}.float.b{right:8px}}
+
+/* Faixa de credibilidade */
+.proof{border-block:1px solid var(--line);background:var(--surface-solid)}
+.proof ul{list-style:none;margin:0;padding-block:28px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.proof li{display:grid;gap:6px;min-width:0}
+.proof b{font:700 1.02rem/1.3 var(--display)}
+.proof span{font-size:.9rem;color:var(--ink-2);line-height:1.45}
+@media (max-width:900px){.proof ul{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.proof ul{grid-template-columns:1fr}}
+
+/* Problema */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.side{padding:clamp(22px,3vw,32px);display:grid;gap:18px;align-content:start}
+.tag{display:inline-flex;align-items:center;gap:8px;justify-self:start;font:600 .74rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;padding:8px 12px;border-radius:999px}
+.tag.pain{color:var(--pain);background:rgba(220,38,38,.08)}
+.tag.gain{color:var(--gain);background:rgba(22,163,74,.1)}
+.tag.blue{color:var(--accent-deep);background:var(--glow)}
+.side ul{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.side li{display:grid;grid-template-columns:22px 1fr;gap:10px;color:var(--ink-2)}
+.side li::before{content:"";width:18px;height:18px;margin-top:4px;border-radius:50%;border:1.5px solid currentColor}
+.side.manual li::before{color:#CBD5E1}
+.side.ia li::before{color:var(--gain);background:radial-gradient(circle,var(--gain) 0 3.5px,transparent 4px)}
+.pill{border-radius:14px;padding:14px 16px;font:600 .85rem/1.3 var(--mono);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.side.manual .pill{background:#F1F5F9;color:var(--ink-2)}
+.side.ia .pill{background:rgba(22,163,74,.08);color:#166534}
+.side.ia{border-color:rgba(37,99,235,.25)}
+@media (max-width:760px){.compare{grid-template-columns:1fr}}
+
+/* Formatos */
+.formats{background:linear-gradient(180deg,var(--bg),#EEF3FA 40%,var(--bg))}
+.offers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.offers .offer:not(.premium){grid-template-columns:1fr}
+.offers .offer:not(.premium) .offer-body{padding:clamp(24px,2.6vw,32px)}
+.offers .offer:not(.premium) h3{font-size:1.45rem}
+.offer.premium{grid-column:1/-1;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)!important}
+@media (max-width:980px){.offers{grid-template-columns:1fr}}
+.offer{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:0;overflow:hidden}
+.offer:nth-child(even){grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}
+.offer:nth-child(even) .offer-media{order:2}
+.offer-media{padding:14px}
+.offer-media .foto{height:100%;min-height:260px}
+.offer-media .foto img{height:100%;object-fit:cover}
+.offer-body{padding:clamp(24px,3.5vw,44px);display:grid;gap:18px;align-content:start;min-width:0}
+.offer-top{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.offer-n{font:600 .78rem/1 var(--mono);color:var(--ink-3);letter-spacing:.1em}
+.offer h3{font-size:clamp(1.5rem,1.2rem + 1vw,2rem);letter-spacing:-.015em}
+.offer .lead{font-size:1.08rem;color:var(--ink);font-weight:500}
+.offer p{color:var(--ink-2)}
+.offer ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+.offer li{position:relative;padding-left:26px;color:var(--ink-2)}
+.offer li::before{content:"";position:absolute;left:2px;top:.62em;width:12px;height:2px;background:var(--accent)}
+.takeaway{border-left:3px solid var(--accent);padding:4px 0 4px 16px;color:var(--ink);font-weight:500}
+.takeaway small{display:block;font:600 .7rem/1.6 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.offer.premium{border:1.5px solid rgba(37,99,235,.45);box-shadow:0 24px 50px -20px rgba(30,58,138,.35)}
+@media (max-width:860px){.offer,.offer:nth-child(even),.offer.premium{grid-template-columns:1fr!important}.offer:nth-child(even) .offer-media{order:0}.offer-media .foto{min-height:0;aspect-ratio:4/5;max-width:440px}}
+
+.table-box{margin-top:44px;overflow-x:auto;border-radius:var(--radius)}
+table{width:100%;border-collapse:collapse;min-width:720px;font-size:.95rem}
+th,td{text-align:left;padding:16px 18px;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{font:600 .72rem/1.2 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);background:#F1F5F9}
+tbody th{font:700 1rem/1.3 var(--display);color:var(--ink)}
+td{color:var(--ink-2)}
+tbody tr:last-child>*{border-bottom:0}
+.meter{display:inline-flex;gap:4px;vertical-align:middle;margin-right:8px}
+.meter i{width:14px;height:6px;border-radius:3px;background:var(--line)}
+.meter i.on{background:var(--accent)}
+.price-note{margin-top:22px;display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:20px 24px}
+.price-note p{color:var(--ink-2);max-width:62ch}
+
+/* Método */
+.method .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(32px,5vw,72px);align-items:start}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:0;position:relative}
+.steps li{display:grid;grid-template-columns:52px 1fr;gap:18px;padding-bottom:28px;position:relative}
+.steps li:not(:last-child)::after{content:"";position:absolute;left:25px;top:52px;bottom:0;border-left:2px dashed rgba(37,99,235,.45)}
+.step-n{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font:600 .82rem/1 var(--mono);color:var(--accent-deep);background:var(--surface-solid);border:1px solid var(--line);box-shadow:var(--shadow)}
+.steps h3{font-size:1.15rem;margin-top:12px}
+.steps p{color:var(--ink-2);margin-top:6px}
+.method-side{display:grid;gap:22px;position:sticky;top:96px}
+.tools{padding:24px;display:grid;gap:14px}
+.tools p{font:600 1.05rem/1.4 var(--display);color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{font:500 .82rem/1 var(--body);padding:9px 12px;border-radius:999px;background:#F1F5F9;color:var(--ink-2);border:1px solid var(--line)}
+@media (max-width:900px){.method .wrap{grid-template-columns:1fr}.method-side{position:static}}
+
+/* Na prática */
+.cases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.case{padding:26px;display:grid;gap:12px;align-content:start}
+.case .tag{margin-bottom:4px}
+.case p{color:var(--ink-2);font-size:.98rem}
+.case .res{font-size:.92rem;color:var(--ink);border-top:1px solid var(--line);padding-top:12px}
+.case.own{background:var(--ink);border-color:var(--ink)}
+.case.own h3{color:#fff}
+.case.own p{color:#CBD5E1}
+.case.own .tag{background:rgba(219,234,254,.14);color:#BFDBFE}
+.disclaimer{margin-top:22px;font-size:.88rem;color:var(--ink-3);max-width:80ch}
+@media (max-width:980px){.cases{grid-template-columns:1fr 1fr}}
+@media (max-width:620px){.cases{grid-template-columns:1fr}}
+
+/* Sobre */
+.about-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(32px,5vw,72px);align-items:start}
+.about-photos{display:grid;grid-template-columns:1fr 1fr;gap:14px;position:sticky;top:96px}
+.about-photos .foto:first-child{grid-column:1/-1}
+.bio{display:grid;gap:18px;color:var(--ink-2);font-size:1.06rem}
+.bio p:first-child{font:600 1.3rem/1.45 var(--display);color:var(--ink)}
+.timeline{list-style:none;margin:36px 0 0;padding:0;display:grid;gap:0;border-left:2px solid var(--line)}
+.timeline li{position:relative;padding:0 0 22px 26px;display:grid;grid-template-columns:72px 1fr;gap:14px}
+.timeline li::before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--surface-solid);border:2px solid var(--accent)}
+.timeline li:last-child::before{background:var(--accent)}
+.timeline time{font:600 .9rem/1.6 var(--mono);color:var(--accent-deep)}
+.timeline span{color:var(--ink-2)}
+.habits{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:36px}
+.habit{padding:20px;display:grid;gap:8px}
+.habit b{font:600 .72rem/1 var(--mono);letter-spacing:.12em;color:var(--accent)}
+.habit p{font:700 1.02rem/1.35 var(--display);color:var(--ink)}
+.quote{margin-top:22px;padding:22px 24px;display:grid;gap:6px}
+.quote p{color:var(--ink);font-weight:500}
+.edu{margin-top:36px;display:grid;gap:12px}
+.edu h3{font-size:1.05rem}
+.edu ul{margin:0;padding-left:20px;color:var(--ink-2);display:grid;gap:6px}
+@media (max-width:900px){.about-grid{grid-template-columns:1fr}.about-photos{position:static}}
+@media (max-width:620px){.habits{grid-template-columns:1fr}.timeline li{grid-template-columns:1fr;gap:2px}}
+
+/* Galeria */
+.gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:220px;gap:14px}
+.gallery .foto{height:100%}
+.gallery .g1{grid-column:span 2;grid-row:span 2}
+.gallery .g4{grid-column:span 2}
+@media (max-width:760px){.gallery{grid-template-columns:1fr 1fr;grid-auto-rows:180px}.gallery .g1{grid-column:1/-1}}
+
+/* Depoimentos */
+.quotes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.testi{padding:26px;display:grid;gap:18px;align-content:space-between;border-style:dashed}
+.testi blockquote{margin:0;color:var(--ink-2);font-size:1rem}
+.who{display:flex;gap:12px;align-items:center}
+.who .foto{width:48px;height:48px;border-radius:50%;flex:none}
+.who .foto .ph{padding:0}
+.who b{display:block;font:700 .95rem/1.2 var(--display)}
+.who span{font-size:.85rem;color:var(--ink-3)}
+@media (max-width:900px){.quotes{grid-template-columns:1fr}}
+
+/* FAQ */
+.faq{display:grid;gap:12px;max-width:860px}
+.faq details{padding:0 24px}
+.faq summary{cursor:pointer;list-style:none;padding:20px 0;font:700 1.08rem/1.4 var(--display);display:flex;justify-content:space-between;gap:16px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font:500 1.5rem/1 var(--body);color:var(--accent);flex:none;transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{color:var(--ink-2);padding-bottom:22px;max-width:70ch}
+
+/* CTA final */
+.final{background:var(--ink);color:#E2E8F0;position:relative;overflow:hidden}
+.final::before{content:"";position:absolute;right:-200px;top:-200px;width:700px;height:700px;background:radial-gradient(circle,rgba(37,99,235,.35),transparent 65%)}
+.final .wrap{position:relative;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(32px,5vw,72px);align-items:center}
+.final h2{color:#fff}
+.final .eyebrow{color:#93C5FD}
+.final .lede{color:#CBD5E1}
+.final ol{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:14px;counter-reset:s}
+.final ol li{counter-increment:s;display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:center;color:#E2E8F0}
+.final ol li::before{content:counter(s);width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font:600 .9rem/1 var(--mono);background:rgba(255,255,255,.08);color:#93C5FD;border:1px solid rgba(255,255,255,.14)}
+.final .phone{font:600 1.05rem/1 var(--mono);color:#fff;letter-spacing:.02em;user-select:all}
+.final .foto:not(.has-img){border-color:rgba(148,163,184,.6);background:linear-gradient(160deg,#1E293B,#0F172A)}
+.final .foto .ph b{color:#93C5FD}.final .foto .ph span{color:#CBD5E1}
+.final .btn-primary{background:var(--wa);box-shadow:0 12px 28px -10px rgba(22,163,74,.7)}
+.final .btn-primary:hover{background:#15803D}
+@media (max-width:860px){.final .wrap{grid-template-columns:1fr}.final .foto{max-width:420px}}
+
+/* Rodapé */
+footer{padding-block:36px calc(36px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);font-size:.9rem;color:var(--ink-3)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px 32px;justify-content:space-between;align-items:center}
+footer nav{display:flex;flex-wrap:wrap;gap:20px}
+footer a{color:var(--ink-2);text-decoration:none}
+footer a:hover{color:var(--ink)}
+
+/* WhatsApp flutuante */
+.wa-float{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:40;width:60px;height:60px;border-radius:50%;background:var(--wa);display:grid;place-items:center;box-shadow:0 12px 28px -8px rgba(22,163,74,.6);transition:transform .15s}
+.wa-float:hover{transform:scale(1.06)}
+.wa-float svg{width:30px;height:30px;fill:#fff}
+</style>
+</head>
+<body>
+
+<header class="top" id="topo">
+  <div class="wrap">
+    <a class="brand" href="#inicio">Willian Castilho<i>|</i><em>IA Aplicada</em></a>
+    <nav class="nav" aria-label="Menu principal">
+      <a href="#formatos">Formatos</a>
+      <a href="#metodo">Como trabalho</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#duvidas">Dúvidas</a>
+      <a class="btn btn-primary" href="https://wa.me/5535999710419?text=Ol%C3%A1%2C%20Willian%21%20Vi%20seu%20site%20e%20quero%20agendar%20uma%20conversa%20sobre%20a%20mentoria%20de%20IA%20Aplicada." target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.8-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.1 5.1 0 0 0 1.1 2.7 11.6 11.6 0 0 0 4.4 3.9c1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.4-.3Z"/></svg>
+        <span>Falar no WhatsApp</span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div class="hero-copy">
+      <p class="eyebrow">Mentoria em IA Aplicada</p>
+      <h1>IA aplicada, do problema à <span>solução funcionando.</span></h1>
+      <p class="lede">Ajudo empresas, equipes e profissionais a tirar a IA da conversa e colocar no trabalho de todo dia: processos que rodam sozinhos, agentes que atendem e ganho que dá para medir em horas e em reais.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://wa.me/5535999710419?text=Ol%C3%A1%2C%20Willian%21%20Vi%20seu%20site%20e%20quero%20agendar%20uma%20conversa%20sobre%20a%20mentoria%20de%20IA%20Aplicada." target="_blank" rel="noopener">Agendar uma conversa no WhatsApp</a>
+        <a class="btn btn-ghost" href="#formatos">Conhecer os formatos</a>
+      </div>
+      <p class="note">Quem responde sou eu, direto no meu WhatsApp. Marcamos um horário e eu explico como funciona cada formato e os valores, sem compromisso.</p>
+    </div>
+    <div class="hero-media">
+      <svg class="arcs" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <circle cx="50" cy="50" r="49"/><circle cx="50" cy="50" r="40"/><circle cx="50" cy="50" r="31"/>
+      </svg>
+      <figure class="foto has-img r-45"><img src="img/willian-castilho-retrato.jpg" alt="Willian Castilho, de blazer azul-marinho e camisa azul clara" width="1000" height="1250" decoding="async"></figure>
+      <div class="float glass a"><b>10 anos</b><span>dentro da operação de uma multinacional</span></div>
+      <div class="float glass b"><b>Do zero ao ar</b><span>diagnóstico, construção e solução rodando</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAIXA DE CREDIBILIDADE ============ -->
+<section class="proof" aria-label="Credenciais">
+  <ul class="wrap">
+    <li><b>Vem da operação</b><span>10 anos numa multinacional, de conferir faturas a coordenar a operação nacional de telecom.</span></li>
+    <li><b>IA no meu dia a dia</b><span>Agentes, automações e análises que uso no trabalho real, toda semana.</span></li>
+    <li><b>Sem ferramenta favorita</b><span>Claude, ChatGPT, Copilot, Gemini, n8n ou servidor próprio. Quem escolhe é o problema.</span></li>
+    <li><b>Online e presencial</b><span>Base em Poços de Caldas-MG, atendimento online em todo o Brasil.</span></li>
+  </ul>
+</section>
+
+<!-- ============ O PROBLEMA ============ -->
+<section class="section" id="problema">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">O problema</p>
+      <h2>Quase toda empresa já testou IA. Poucas têm IA trabalhando de verdade.</h2>
+      <p class="lede">A equipe abre o chat, pede um resumo, gera um texto. Ajuda, mas o processo continua igual. O trabalho manual segue lá, cada pessoa usa de um jeito e ninguém consegue dizer quanto tempo a IA economizou.</p>
+    </div>
+    <div class="compare">
+      <div class="side manual glass">
+        <span class="tag pain">Rotina manual</span>
+        <ul>
+          <li>Relatório montado à mão toda semana, copiando de planilha em planilha.</li>
+          <li>A mesma pergunta de cliente respondida dez vezes por dia.</li>
+          <li>Informação espalhada, cada um com a sua versão do arquivo.</li>
+          <li>"A IA ajuda", mas sem nenhum número que mostre quanto.</li>
+        </ul>
+        <div class="pill"><span>Tempo gasto</span><span>horas por semana</span></div>
+      </div>
+      <div class="side ia glass">
+        <span class="tag gain">Com IA aplicada</span>
+        <ul>
+          <li>Relatório pronto no horário, com os dados certos. Você só revisa.</li>
+          <li>Agente responde o básico e passa para uma pessoa o que precisa de atenção.</li>
+          <li>Uma base única que a IA consulta antes de responder.</li>
+          <li>Horas devolvidas e erros evitados, medidos desde o primeiro dia.</li>
+        </ul>
+        <div class="pill"><span>Tempo gasto</span><span>minutos de revisão</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FORMATOS ============ -->
+<section class="section formats" id="formatos">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Formatos de mentoria</p>
+      <h2>Quatro jeitos de trabalharmos juntos</h2>
+      <p class="lede">Do treinamento da equipe inteira ao projeto construído lado a lado com você. O valor depende do formato, do tamanho do grupo e do que vamos construir, então eu explico tudo numa conversa rápida pelo WhatsApp.</p>
+    </div>
+
+    <div class="offers">
+
+      <article class="offer glass" id="empresas">
+        <div class="offer-body">
+          <div class="offer-top"><span class="offer-n">01</span><span class="tag blue">Equipes e lideranças</span></div>
+          <h3>Mentoria para empresas</h3>
+          <p class="lead">Para quem quer a equipe usando IA com padrão, segurança e resultado que aparece no fechamento do mês.</p>
+          <ul>
+            <li>Palestra para lideranças: o que a IA entrega de verdade e por onde começar.</li>
+            <li>Treinamento in-company mão na massa, online ou presencial.</li>
+            <li>Diagnóstico dos processos com maior potencial de ganho.</li>
+            <li>Acompanhamento da implementação, com indicadores de tempo e custo.</li>
+          </ul>
+          <p class="takeaway"><small>Sua empresa sai com</small>Equipe treinada no mesmo método, uma lista de oportunidades em ordem de prioridade e os primeiros processos já rodando.</p>
+          <div class="cta-row"><a class="btn btn-primary" href="https://wa.me/5535999710419?text=Ol%C3%A1%2C%20Willian%21%20Quero%20conversar%20sobre%20IA%20aplicada%20para%20a%20minha%20empresa." target="_blank" rel="noopener">Conversar sobre minha empresa</a></div>
+        </div>
+      </article>
+
+      <article class="offer glass" id="workshops">
+        <div class="offer-body">
+          <div class="offer-top"><span class="offer-n">02</span><span class="tag blue">Turma aberta ou exclusiva</span></div>
+          <h3>Workshops práticos</h3>
+          <p class="lead">Algumas horas, um tema bem definido e todo mundo com a mão no teclado.</p>
+          <ul>
+            <li>Temas como agente de atendimento no WhatsApp, relatórios automáticos, IA no e-mail e na planilha, base de conhecimento da empresa.</li>
+            <li>Online ou presencial, em turma aberta ou fechado para a sua equipe.</li>
+            <li>Material de apoio para continuar sozinho depois do encontro.</li>
+          </ul>
+          <p class="takeaway"><small>Você sai com</small>Uma entrega funcionando no fim do encontro, pronta para usar no dia seguinte.</p>
+          <div class="cta-row"><a class="btn btn-primary" href="https://wa.me/5535999710419?text=Ol%C3%A1%2C%20Willian%21%20Tenho%20interesse%20nos%20workshops%20de%20IA%20aplicada." target="_blank" rel="noopener">Quero saber dos próximos workshops</a></div>
+        </div>
+      </article>
+
+      <article class="offer glass" id="grupo">
+        <div class="offer-body">
+          <div class="offer-top"><span class="offer-n">03</span><span class="tag blue">2 a 5 pessoas</span></div>
+          <h3>Mentoria em grupo reduzido</h3>
+          <p class="lead">Um grupo pequeno, um assunto escolhido por vocês e um programa montado sob medida.</p>
+          <ul>
+            <li>Conversa antes de começar para entender o que o grupo precisa resolver.</li>
+            <li>Programa desenhado em cima do tema de vocês, sem conteúdo de prateleira.</li>
+            <li>Encontros ao vivo, com espaço para cada um trazer o próprio caso.</li>
+            <li>Suporte entre os encontros para ninguém travar no meio do caminho.</li>
+          </ul>
+          <p class="takeaway"><small>Ideal para</small>Sócios, um time de área ou profissionais que querem aprender juntos e sair com algo construído.</p>
+          <div class="cta-row"><a class="btn btn-primary" href="https://wa.me/5535999710419?text=Ol%C3%A1%2C%20Willian%21%20Quero%20saber%20mais%20sobre%20a%20mentoria%20em%20grupo%20reduzido%20%282%20a%205%20pessoas%29." target="_blank" rel="noopener">Montar um grupo</a></div>
+        </div>
+      </article>
+
+      <article class="offer glass premium" id="individual">
+        <div class="offer-media">
+          <figure class="foto has-img"><img src="img/willian-castilho-mentoria-1-1.jpg" alt="Willian Castilho, olhando para a câmera com as mãos entrelaçadas" width="1000" height="1249" loading="lazy" decoding="async"></figure>
+        </div>
+        <div class="offer-body">
+          <div class="offer-top"><span class="offer-n">04</span><span class="tag gain">Projeto completo</span></div>
+          <h3>Mentoria 1:1</h3>
+          <p class="lead">Você traz o problema. A gente constrói junto a solução completa com IA.</p>
+          <p>É o formato mais completo. O projeto fica aberto: você, ou a sua empresa, explica o desafio e seguimos juntos todos os passos de um bom engenheiro de IA, do entendimento do problema até a solução rodando e medida.</p>
+          <ul>
+            <li>Diagnóstico do problema e definição do que conta como sucesso.</li>
+            <li>Desenho da solução: ferramentas, dados, segurança e custo de manter.</li>
+            <li>Construção em etapas, com teste a cada passo.</li>
+            <li>Documentação e entrega, com você entendendo e dominando o que foi feito.</li>
+            <li>Contato direto comigo durante todo o projeto.</li>
+          </ul>
+          <p class="takeaway"><small>Você sai com</small>Uma solução de IA funcionando no seu negócio, documentada e sua.</p>
+          <div class="cta-row"><a class="btn btn-primary" href="https://wa.me/5535999710419?text=Ol%C3%A1%2C%20Willian%21%20Quero%20conversar%20sobre%20a%20mentoria%201%3A1%20para%20construir%20uma%20solu%C3%A7%C3%A3o%20com%20IA." target="_blank" rel="noopener">Conversar sobre meu projeto</a></div>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="table-box glass">
+      <table>
+        <caption class="muted" style="caption-side:bottom;text-align:left;padding:14px 18px;font-size:.85rem">Comparativo dos formatos. Valores e datas são combinados na conversa.</caption>
+        <thead><tr><th scope="col">Formato</th><th scope="col">Para quem</th><th scope="col">Tamanho</th><th scope="col">Personalização</th><th scope="col">Resultado</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Empresas</th><td>Equipes e lideranças</td><td>A equipe que precisar</td><td><span class="meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>Ajustada à empresa</td><td>Equipe treinada e processos rodando</td></tr>
+          <tr><th scope="row">Workshop</th><td>Profissionais e equipes</td><td>Turma</td><td><span class="meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i><i></i></span>Tema definido</td><td>Uma entrega pronta no encontro</td></tr>
+          <tr><th scope="row">Grupo reduzido</th><td>Sócios, times pequenos, profissionais</td><td>2 a 5 pessoas</td><td><span class="meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i></i></span>Tema escolhido pelo grupo</td><td>Programa sob medida e casos reais</td></tr>
+          <tr><th scope="row">1:1</th><td>Quem tem um problema específico para resolver</td><td>Individual</td><td><span class="meter" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i></span>Total</td><td>Solução completa com IA, funcionando</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="price-note glass">
+      <p><b style="color:var(--ink)">Por que não tem preço aqui?</b> Cada formato muda bastante conforme o grupo, o tema e o que vamos construir. Prefiro entender o seu caso e passar um valor justo para ele.</p>
+      <a class="btn btn-ghost" href="https://wa.me/5535999710419?text=Ol%C3%A1%2C%20Willian%21%20Gostaria%20de%20saber%20os%20valores%20dos%20formatos%20de%20mentoria." target="_blank" rel="noopener">Pedir os valores no WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MÉTODO ============ -->
+<section class="section method" id="metodo">
+  <div class="wrap">
+    <div>
+      <div class="head">
+        <p class="eyebrow">Como eu trabalho</p>
+        <h2>O caminho de um engenheiro de IA, em cinco etapas</h2>
+        <p class="lede">É o mesmo método que uso nos meus próprios projetos. Na mentoria 1:1 a gente percorre tudo junto. Nos outros formatos, você aprende a aplicar no seu dia a dia.</p>
+      </div>
+      <ol class="steps">
+        <li><span class="step-n">01</span><div><h3>Entender o problema</h3><p>Antes de falar de ferramenta, a gente entende o processo, onde está o gargalo e o que vai contar como sucesso.</p></div></li>
+        <li><span class="step-n">02</span><div><h3>Definir o que a solução precisa fazer</h3><p>Regras, dados que serão usados e como vamos medir o ganho: horas devolvidas, custo, erros evitados.</p></div></li>
+        <li><span class="step-n">03</span><div><h3>Planejar em entregas pequenas</h3><p>O projeto vira uma lista de entregas curtas, cada uma com começo, meio e fim. Você acompanha o andamento o tempo todo.</p></div></li>
+        <li><span class="step-n">04</span><div><h3>Construir e testar</h3><p>Cada entrega é construída e testada antes da próxima. Nada vai para o dia a dia sem passar por teste.</p></div></li>
+        <li><span class="step-n">05</span><div><h3>Revisar e entregar com você no controle</h3><p>Você revisa e aprova cada entrega. Tudo fica documentado e guardado, para a solução não depender de ninguém, nem de mim.</p></div></li>
+      </ol>
+    </div>
+    <aside class="method-side">
+      <div class="tools glass">
+        <p>Uso a ferramenta que resolve o seu problema, não a que está na moda.</p>
+        <div class="chips">
+          <span>Claude</span><span>ChatGPT</span><span>Microsoft Copilot</span><span>Gemini</span><span>Power Platform</span><span>n8n</span><span>Make</span><span>WhatsApp</span><span>APIs</span><span>Servidor próprio</span><span>Claude Code</span><span>MCP</span>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ============ NA PRÁTICA ============ -->
+<section class="section" id="pratica" style="padding-top:0">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Na prática</p>
+      <h2>IA que eu já coloquei para trabalhar</h2>
+      <p class="lede">Nada aqui é demonstração de palco. São soluções que rodam no trabalho real, todos os dias.</p>
+    </div>
+    <div class="cases">
+      <article class="case glass">
+        <span class="tag blue">Agente de IA</span>
+        <h3>Fechamento do mês que chega sozinho</h3>
+        <p>Agente que monta o fechamento de horas e custos e entrega para a liderança às 8h do primeiro dia útil, com painéis de dados reais.</p>
+        <p class="res">Ninguém mais perde o começo do mês montando relatório.</p>
+      </article>
+      <article class="case glass">
+        <span class="tag blue">Assistente com base própria</span>
+        <h3>Perguntas sobre custos, em português</h3>
+        <p>Assistente que responde em linguagem natural quanto se gastou e onde, consultando os dados contábeis antes de responder.</p>
+        <p class="res">Resposta em segundos, com o dado de verdade e sem inventar número.</p>
+      </article>
+      <article class="case glass">
+        <span class="tag blue">App + automação</span>
+        <h3>Falha crítica com dono e prazo</h3>
+        <p>Aplicativo que acompanha cada incidente até a correção definitiva, com prazos de fornecedores e planos de melhoria.</p>
+        <p class="res">Falhas que se repetiam passaram a ter responsável, prazo e acompanhamento.</p>
+      </article>
+      <article class="case glass">
+        <span class="tag blue">App de gestão</span>
+        <h3>Status oficial para a liderança</h3>
+        <p>Aplicativo de acompanhamento que a liderança nacional adotou como canal oficial de status para a equipe global.</p>
+        <p class="res">Uma fonte só, em vez de dezenas de e-mails e planilhas.</p>
+      </article>
+      <article class="case glass">
+        <span class="tag blue">Processos</span>
+        <h3>De planilha solta a processo automático</h3>
+        <p>Controles que viviam em planilhas locais migrados para listas centralizadas e transformados em apps e fluxos automáticos.</p>
+        <p class="res">Menos retrabalho e informação no mesmo lugar para todo mundo.</p>
+      </article>
+      <article class="case glass own">
+        <span class="tag">Projetos próprios</span>
+        <h3>Do zero até o ar</h3>
+        <p>Agente de atendimento no WhatsApp, aplicativo de rotina infantil criado do zero e publicado em servidor próprio, integrações com APIs e automações em n8n.</p>
+        <p class="res" style="color:#E2E8F0;border-color:rgba(255,255,255,.14)">A mesma esteira que ensino: ideia, construção, teste e publicação.</p>
+      </article>
+    </div>
+    <p class="disclaimer">Os projetos corporativos aparecem aqui sem nomes, dados ou números internos, por confidencialidade.</p>
+  </div>
+</section>
+
+<!-- ============ SOBRE ============ -->
+<section class="section formats" id="sobre">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-photos">
+        <figure class="foto has-img r-23"><img src="img/willian-castilho-sobre.jpg" alt="Willian Castilho sentado em uma banqueta, de blazer azul-marinho" width="900" height="1350" loading="lazy" decoding="async"></figure>
+      </div>
+      <div>
+        <div class="head" style="margin-bottom:28px">
+          <p class="eyebrow">Quem vai te acompanhar</p>
+          <h2>Prazer, Willian Castilho</h2>
+        </div>
+        <div class="bio">
+          <p>Sou engenheiro de IA aplicada, de Poços de Caldas, no sul de Minas. Aprendi IA onde ela precisa funcionar todo dia: dentro da operação.</p>
+          <p>Comecei em 2016 conferindo faturas de telecom numa multinacional eleita entre as melhores empresas para trabalhar no Brasil. Fui para a operação, passei por projetos e cheguei a coordenar a operação de telecomunicações da empresa no país, com unidades em vários estados e serviços que não podem parar.</p>
+          <p>Foi ali que a IA entrou na minha rotina. Comecei automatizando o que me tomava tempo e hoje boa parte do meu trabalho passa por agentes, automações e análises que devolvem horas para o time.</p>
+          <p>Agora levo esse jeito de trabalhar para empresas e profissionais que querem a mesma coisa: menos trabalho manual e um resultado que dá para mostrar.</p>
+        </div>
+
+        <ol class="timeline" aria-label="Trajetória">
+          <li><time>2016</time><span>Começo conferindo faturas e custos de telecom. Reconhecido como destaque do ano.</span></li>
+          <li><time>2017</time><span>Vou para a operação de telecom. Destaque do ano pela segunda vez seguida.</span></li>
+          <li><time>2020</time><span>Consultor de TI autônomo: automação de processos e aplicativos para empresas da região.</span></li>
+          <li><time>2021</time><span>Volto à operação no suporte especializado e começo as primeiras automações da área.</span></li>
+          <li><time>2023</time><span>Promovido a coordenador da operação de telecom no Brasil. Planilhas viram apps e processos automáticos.</span></li>
+          <li><time>2025</time><span>Contratado diretamente pela multinacional. Agentes e IA passam a fazer parte da rotina da operação.</span></li>
+          <li><time>2026</time><span>Formado em Gestão da TI, estudando Engenharia de IA e lançando a Mentoria IA Aplicada.</span></li>
+        </ol>
+
+        <div class="habits">
+          <div class="habit glass"><b>HÁBITO 1</b><p>Tratar o problema do outro como meu.</p></div>
+          <div class="habit glass"><b>HÁBITO 2</b><p>Manter a calma quando tudo está parado.</p></div>
+          <div class="habit glass"><b>HÁBITO 3</b><p>Traduzir o técnico para quem decide.</p></div>
+        </div>
+
+        <div class="quote glass">
+          <span class="tag gain">Reconhecimento</span>
+          <p>Estruturei junto com um grande fornecedor um padrão de análise de causa raiz que ele depois adotou como modelo para outros clientes.</p>
+        </div>
+
+        <div class="edu">
+          <h3>Formação</h3>
+          <ul>
+            <li>Tecnólogo em Gestão da Tecnologia da Informação</li>
+            <li>Engenharia de IA, em andamento: agentes, RAG, bancos vetoriais, LangChain, LangGraph e MCP</li>
+            <li>Fundamentos de Inteligência Artificial no Azure (preparatório AI-900)</li>
+            <li>Segurança em Tecnologia da Informação · Kanban (KEPC) · Lean Manufacturing · Arquitetura de Soluções para Transformação Digital</li>
+          </ul>
+          <p><a href="https://www.linkedin.com/in/willianpcastilho" target="_blank" rel="noopener">Ver trajetória completa no LinkedIn →</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BASTIDORES (GALERIA) ============ -->
+<!-- Escondida até chegarem fotos de palestras/workshops/mentorias: remover o atributo hidden para mostrar -->
+<section class="section" id="bastidores" hidden>
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Bastidores</p>
+      <h2>Por trás das mentorias</h2>
+    </div>
+    <div class="gallery">
+      <figure class="foto g1" data-foto="10"><div class="ph"><b>FOTO 10</b><span>Palestra ou apresentação, você em pé falando para o público.</span></div></figure>
+      <figure class="foto" data-foto="11"><div class="ph"><b>FOTO 11</b><span>Atendimento online: você em chamada de vídeo.</span></div></figure>
+      <figure class="foto" data-foto="12"><div class="ph"><b>FOTO 12</b><span>Detalhe: mãos no teclado, tela com fluxo.</span></div></figure>
+      <figure class="foto g4" data-foto="13"><div class="ph"><b>FOTO 13</b><span>Turma de workshop ou grupo reunido.</span></div></figure>
+      <figure class="foto" data-foto="14"><div class="ph"><b>FOTO 14</b><span>Retrato descontraído.</span></div></figure>
+      <figure class="foto" data-foto="15"><div class="ph"><b>FOTO 15</b><span>Seu espaço de trabalho.</span></div></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DEPOIMENTOS (aguardando material) ============ -->
+<!-- Escondida até chegarem os depoimentos autorizados: remover o atributo hidden para mostrar -->
+<section class="section" id="depoimentos" style="padding-top:0" hidden>
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Depoimentos</p>
+      <h2>Quem já trabalhou comigo</h2>
+    </div>
+    <div class="quotes">
+      <figure class="testi glass" style="margin:0">
+        <blockquote>[Depoimento 1: texto curto da pessoa, com autorização para publicar.]</blockquote>
+        <figcaption class="who"><div class="foto"><div class="ph"></div></div><div><b>[Nome]</b><span>[Cargo ou perfil]</span></div></figcaption>
+      </figure>
+      <figure class="testi glass" style="margin:0">
+        <blockquote>[Depoimento 2: de preferência alguém que fez mentoria e ganhou destaque no trabalho.]</blockquote>
+        <figcaption class="who"><div class="foto"><div class="ph"></div></div><div><b>[Nome]</b><span>[Cargo ou perfil]</span></div></figcaption>
+      </figure>
+      <figure class="testi glass" style="margin:0">
+        <blockquote>[Depoimento 3: de preferência um cliente de consultoria, citando o ganho que teve.]</blockquote>
+        <figcaption class="who"><div class="foto"><div class="ph"></div></div><div><b>[Nome]</b><span>[Cargo ou perfil]</span></div></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DÚVIDAS ============ -->
+<section class="section formats" id="duvidas">
+  <div class="wrap">
+    <div class="head">
+      <p class="eyebrow">Dúvidas frequentes</p>
+      <h2>Antes de chamar no WhatsApp</h2>
+    </div>
+    <div class="faq">
+      <details class="glass" open><summary>Quanto custa?</summary><p>Depende do formato, do tamanho do grupo e do que vamos construir. Em vez de uma tabela que não serve para ninguém, eu entendo o seu caso numa conversa rápida e passo um valor justo para ele, sem compromisso.</p></details>
+      <details class="glass"><summary>Preciso saber programar?</summary><p>Não. Nos workshops e nas mentorias eu parto do que você já sabe. Quando a solução pede código ou servidor, eu explico o porquê de cada escolha e você termina sabendo o que foi feito.</p></details>
+      <details class="glass"><summary>Qual formato é o melhor para mim?</summary><p>Se a ideia é levar IA para a equipe, comece por empresas ou workshop. Se você e mais algumas pessoas têm um assunto específico, o grupo reduzido encaixa melhor. Se existe um problema concreto que você quer ver resolvido com IA, é o 1:1. Na conversa a gente define junto.</p></details>
+      <details class="glass"><summary>E os dados da minha empresa?</summary><p>Segurança vem antes de tudo. A gente define juntos quais dados podem ir para qual ferramenta, usa as contas corporativas quando existem e não expõe informação sensível. Se a empresa tem TI própria, trabalho junto com ela.</p></details>
+      <details class="glass"><summary>É online ou presencial?</summary><p>Os dois. Atendo online em todo o Brasil. Presencial em Poços de Caldas e região, ou em qualquer cidade com deslocamento e hospedagem por conta de quem contrata.</p></details>
+      <details class="glass"><summary>Vou ficar preso a alguma ferramenta?</summary><p>Não. Eu não revendo ferramenta. A escolha sai do seu problema e do que a sua empresa já usa, e tudo fica documentado para você seguir sem depender de mim.</p></details>
+      <details class="glass"><summary>Quanto tempo leva?</summary><p>Um workshop leva algumas horas. Grupo reduzido e 1:1 costumam durar algumas semanas, conforme o tema e o tamanho do projeto. O prazo fica combinado antes de começar.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHAMADA FINAL ============ -->
+<section class="section final" id="contato">
+  <div class="wrap">
+    <div style="display:grid;gap:22px;min-width:0">
+      <p class="eyebrow">Vamos conversar</p>
+      <h2>Me conta o que você quer resolver com IA.</h2>
+      <p class="lede">O WhatsApp é meu, e quem responde sou eu. Em uma conversa curta eu entendo o seu cenário e mostro o melhor caminho, sem apresentação longa e sem compromisso.</p>
+      <ol>
+        <li>Você me chama no WhatsApp.</li>
+        <li>A gente marca um horário que funcione para você.</li>
+        <li>Eu explico os formatos, os valores e o que faz sentido para o seu caso.</li>
+      </ol>
+      <div class="cta-row" style="align-items:center;margin-top:8px">
+        <a class="btn btn-primary" href="https://wa.me/5535999710419?text=Ol%C3%A1%2C%20Willian%21%20Vi%20seu%20site%20e%20quero%20agendar%20uma%20conversa%20sobre%20a%20mentoria%20de%20IA%20Aplicada." target="_blank" rel="noopener">Chamar no WhatsApp</a>
+        <span class="phone">(35) 99971-0419</span>
+      </div>
+    </div>
+    <figure class="foto has-img r-45"><img src="img/willian-castilho-contato.jpg" alt="Willian Castilho sorrindo" width="900" height="1124" loading="lazy" decoding="async"></figure>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span><b style="color:var(--ink);font-family:var(--display)">Willian Castilho | IA Aplicada</b> · Poços de Caldas, MG · Online em todo o Brasil</span>
+    <nav aria-label="Rodapé">
+      <a href="https://wa.me/5535999710419?text=Ol%C3%A1%2C%20Willian%21%20Vi%20seu%20site%20e%20quero%20agendar%20uma%20conversa%20sobre%20a%20mentoria%20de%20IA%20Aplicada." target="_blank" rel="noopener">WhatsApp</a>
+      <a href="https://www.linkedin.com/in/willianpcastilho" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="#inicio">Voltar ao topo</a>
+    </nav>
+    <span>© 2026 Willian Castilho</span>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/5535999710419?text=Ol%C3%A1%2C%20Willian%21%20Vi%20seu%20site%20e%20quero%20agendar%20uma%20conversa%20sobre%20a%20mentoria%20de%20IA%20Aplicada." target="_blank" rel="noopener" aria-label="Conversar no WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.8-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.1 5.1 0 0 0 1.1 2.7 11.6 11.6 0 0 0 4.4 3.9c1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.4-.3Z"/></svg>
+</a>
+
+<script>
+(function(){
+  var top=document.getElementById('topo');
+  function onScroll(){top.classList.toggle('scrolled',window.scrollY>8)}
+  window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+})();
+</script>
+</body>
+</html>
